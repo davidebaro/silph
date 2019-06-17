@@ -35,7 +35,6 @@ import it.uniroma3.bar.silph.model.User;
 import it.uniroma3.bar.silph.repository.UserRepository;
 import it.uniroma3.bar.silph.services.AlbumService;
 import it.uniroma3.bar.silph.services.CustomerService;
-import it.uniroma3.bar.silph.services.CustomerValidator;
 import it.uniroma3.bar.silph.services.PhotoService;
 import it.uniroma3.bar.silph.services.PhotographerService;
 import it.uniroma3.bar.silph.services.RequestService;
@@ -62,9 +61,6 @@ public class SilphController {
 
 	@Autowired
 	private CustomerService customerService;
-
-	@Autowired
-	private CustomerValidator customerValidator;
 
 	@ModelAttribute("cart")
 	public List<Photo> cart(Model model) {
@@ -224,32 +220,25 @@ public class SilphController {
 	}
 
 	@RequestMapping("/send_form")
-	public String sendForm(@SessionAttribute("cart") List<Photo> cart, @ModelAttribute("customer") Customer customer, Model model, BindingResult bindingResult) {
-		this.customerValidator.validate(customer, bindingResult);
-		if(bindingResult.hasErrors()) {
-			customer = new Customer();
-			model.addAttribute("customer", customer);
-			return "request_form.html";
-		}
-		else {
-			Request request = new Request();
-			customer = customerService.add(customer);
-			request.setCustomer(customer);
-			request.setPhotos(cart);
+	public String sendForm(@SessionAttribute("cart") List<Photo> cart, @ModelAttribute("customer") Customer customer, Model model) {
+		Request request = new Request();
+		customer = customerService.add(customer);
+		request.setCustomer(customer);
+		request.setPhotos(cart);
 
-			cart = photoService.get(requestService.get(cart));
-			for(Photo p : cart) {
-				List<Request> requests = p.getRequests();
-				if(requests==null) {
-					requests = (new LinkedList<Request>());
-				}
-				requests.add(request);
+		cart = photoService.get(requestService.get(cart));
+		for(Photo p : cart) {
+			List<Request> requests = p.getRequests();
+			if(requests==null) {
+				requests = (new LinkedList<Request>());
 			}
-			requestService.add(request);
-			model.addAttribute("request", request);
-			return "request_submitted.html";
+			requests.add(request);
 		}
+		requestService.add(request);
+		model.addAttribute("request", request);
+		return "request_submitted.html";
 	}
+
 
 	@RequestMapping("/requests")
 	public String requests(Model model) {
