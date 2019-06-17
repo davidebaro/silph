@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Manager</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/manager">Photo
+				Manager</a></li>
+		<li><a class="navbar" href="/requests">Requests</a></li>
+	</ul>
+	<div class="page_manager">
+		<div class="form_box">
+			<div class="form_text" style="font-weight: bold;">
+				Add photo to <span
+					th:text="${photo.album.photographer.firstName}+' '+${photo.album.photographer.secondName}">
+				</span>'s album: "<span th:text="${photo.album.name}"> </span>"
+			</div>
+			<form th:action="@{'/insert_photo/'+${photo.album.id}}" method="POST"
+				enctype="multipart/form-data">
+				<div class="form_text">
+					Select photo: <input type="file" name="file" />
+				</div>
+
+				<div class="form_text">
+					<button class="button" type="submit">Upload</button>
+				</div>
+			</form>
+			<div class="form_text">
+				*Don't upload images too large, this may influence server's
+				performance. <a href="https://imagecompressor.com">Click here</a>
+				for a free web tool to resize images (~100KB raccomended).
+			</div>
+		</div>
+	</div>
+
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>

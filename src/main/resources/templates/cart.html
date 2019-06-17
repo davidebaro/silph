@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Cart</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/photos">Photos</a></li>
+		<li><a class="navbar" href="/albums">Albums</a></li>
+		<li><a class="navbar" href="/photographers">Photographers</a></li>
+		<li><a class="navbar_extra" href="/cart">Go to Cart</a></li>
+		<li><a class="navbar_extra" href="/login">Login</a></li>
+	</ul>
+
+	<div class="page">
+		<div style="text-align: center;">
+			<a class="button" style="text-decoration: none;"
+				href="/convalidate_cart">Compile request</a>
+		</div>
+
+		<div class="image_cart" th:each="elem:${cart}">
+			<img th:src="@{'/photo/'+${elem.id}}">
+			<div class="button_cart">
+				<a th:href="@{'/remove_from_cart/'+${elem.id}}" style="color:white;">Remove</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>

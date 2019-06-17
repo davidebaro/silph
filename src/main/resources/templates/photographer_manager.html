@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Manager</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/manager">Photo
+				Manager</a></li>
+		<li><a class="navbar" href="/requests">Requests</a></li>
+	</ul>
+
+	<div class="page_manager">
+		<div class="form_box">
+			<form th:action="@{/select_photographer}" method="GET"
+				th:object="${photographer}">
+				<div class="form_text">
+					Select a Photographer: <select th:field="*{id}">
+						<option th:each="elem : ${photographers}" th:value="${elem.id}"
+							th:text="${elem.firstName+' '+elem.secondName}"></option>
+					</select>
+				</div>
+				<div class="form_text">
+					<button class="button" type="submit">Next</button>
+				</div>
+			</form>
+
+			<div class="form_text" style="color: gray;">- or -</div>
+
+			<form th:action="@{/insert_photographer}" method="POST"
+				th:object="${photographer}">
+				<div class="form_text" style="font-weight: bold;">Add a
+					Photographer</div>
+
+				<div class="form_text">
+					First Name: <input type="text" th:field="*{firstName}" />
+				</div>
+				<div class="form_text">
+					Second Name: <input type="text" th:field="*{secondName}" />
+				</div>
+				<div class="form_text">
+					<button class="button" type="submit">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>

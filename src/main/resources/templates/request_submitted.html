@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Submitted</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/photos">Photos</a></li>
+		<li><a class="navbar" href="/albums">Albums</a></li>
+		<li><a class="navbar" href="/photographers">Photographers</a></li>
+		<li><a class="navbar_extra" href="/cart">Go to Cart</a></li>
+		<li><a class="navbar_extra" href="/login">Login</a></li>
+	</ul>
+
+	<div class="page">
+		<div class="form_box" style="max-width: 600px">
+			<div class="form_text">
+				<div style="color:green;">Request submitted! [#<span th:text="${request.id}"></span>]</div>An operator will contact you via E-Mail
+				to send you the contract.<br>Thanks for choosing us!<br>
+				<div style="color: grey; margin-top:15px;">Silph S.P.A.</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>

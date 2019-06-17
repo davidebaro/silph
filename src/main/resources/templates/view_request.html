@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Manager</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/manager">Photo Manager</a></li>
+		<li><a class="navbar" href="/requests">Requests</a></li>
+	</ul>
+	<div class="page">
+		<div style="line-height: 1.6;">
+			Request <span th:text="${'#'+request.id}"></span><br> First
+			Name: <span style="color: green;" th:text="${request.customer.firstName}"></span><br>
+			Second Name: <span style="color: green;" th:text="${request.customer.secondName}"></span><br>
+			Email: <span style="color: green;" th:text="${request.customer.email}"></span><br>
+			Phone Number: <span style="color: green;" th:text="${request.customer.phone}"></span><br>
+		</div>
+		<ul>
+			<li th:each="elem:${photos}"><a th:href="@{'/view/'+${elem.id}}"
+				th:text="${'Photo #'+elem.id}"></a></li>
+		</ul>
+		<a class="button" style="text-decoration: none;"
+				th:href="@{'/manage_request/'+${request.id}}">Done</a>
+	</div>
+
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>

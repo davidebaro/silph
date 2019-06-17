@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-tymeleaf-spring4-4.dtd">
+<html xmlns:th=http://www.thymeleaf.org
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/style.css?ts=<?=time()?>&quot}" />
+<title>Silph - Order</title>
+</head>
+<body class="main">
+	<div class="header">
+		<a href="/" style="color: white; text-decoration: none;">Silph</a>
+	</div>
+	<ul class="navbar">
+		<li><a class="navbar" href="/photos">Photos</a></li>
+		<li><a class="navbar" href="/albums">Albums</a></li>
+		<li><a class="navbar" href="/photographers">Photographers</a></li>
+		<li><a class="navbar_extra" href="/cart">Go to Cart</a></li>
+	</ul>
+	<div class="page">
+		<div class="form_box">
+			<form th:action="@{/send_form}" method="POST" th:object="${customer}">
+				<div th:if="${#fields.hasErrors('*')}" th:errors="*{invalid}">sample</div>
+				<div class="form_text">
+					First Name: <input type="text" th:field="*{firstName}" />
+				</div>
+				<div class="form_text">
+					Second Name: <input type="text" th:field="*{secondName}" />
+				</div>
+				<div class="form_text">
+					E-Mail address: <input type="text" th:field="*{email}" />
+				</div>
+				<div class="form_text">
+					Phone Number: <input type="text" th:field="*{phone}" />
+				</div>
+				<div class="form_text">
+					<button class="button" type="submit">Submit request</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="bottom_box">
+		<div class="bottom_text">Made by Davide Baroffio (500353).</div>
+	</div>
+</body>
+</html>
